@@ -1,29 +1,18 @@
-# La ligne ci-dessous indique le nom du workflow (visible dans la page Actions du repo)
-name: Python Package
-# La ligne ci-dessous indique que le workflow doit être déclenché à chaque push sur la branche main
+name: Python package
 on: [push]
-# La ligne ci-dessous indique les jobs à exécuter
 jobs:
-# La ligne ci-dessous indique le nom du job
-  build:
-# La ligne ci-dessous indique l'OS sur lequel le job doit être exécuté
+  build: 
+
     runs-on: ubuntu-latest
-# La ligne ci-dessous indique les étapes à exécuter. Celles-ci peuvent être des actions ou des commandes à exécuter
     steps:
-# La ligne ci-dessous définit une action à exécuter. Ici, on référence la version 3 du repo
-      - uses : actions/checkout@v3
-# La ligne ci-dessous définit le nom de l'étape
+      - uses: actions/checkout@v3
+        with: 
+            fetch-depth: 0
       - name: Setup Python
-# La ligne ci-dessous définit une action à exécuter. Ici c'est l'action setup-python@v4
         uses: actions/setup-python@v4
-# Les deux lignes ci-dessous défnissent les paramètres de l'action setup-python@v4. Ici la version de python
-        with:
-          python-version: '3.9'
-# La ligne ci-dessous définit le nom de l'étape
-      - name: Install Packages
-# La ligne ci-dessous définit une commande à exécuter. Ici, on installe les dépendances du projet
+        with: 
+          python-version: "3.9"
+      - name: Install packages
         run: pip install -r requirements.txt
-# La ligne ci-dessous définit le nom de l'étape
       - name: Run tests
-# La ligne ci-dessous définit une commande à exécuter. Ici, on lance les tests
-        run: python manage.py test
+        run: python myscript.py
